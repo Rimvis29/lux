@@ -152,6 +152,7 @@ BITCOIN_CORE_H = \
   script/standard.h \
   script/script_error.h \
   serialize.h \
+  scheme.h \
   spork.h \
   stake.h \
   streams.h \
@@ -400,6 +401,7 @@ libbitcoin_common_a_SOURCES = \
   netbase.cpp \
   protocol.cpp \
   pubkey.cpp \
+  scheme.cpp \
   script/interpreter.cpp \
   script/script.cpp \
   script/sign.cpp \

@@ -29,6 +29,7 @@
 #include "rpcserver.h"
 #include "script/standard.h"
 #include "spork.h"
+#include "scheme.h"
 #include "txdb.h"
 #include "script/sigcache.h"
 #include "ui_interface.h"
@@ -680,7 +681,7 @@ bool InitSanityCheck(void)
 /** Initialize lux.
  *  @pre Parameters should be parsed and config file should be read.
  */
-bool AppInit2(boost::thread_group& threadGroup)
+bool AppInit2(boost::thread_group& threadGroup, CScheme& scheme)
 {
 // ********************************************************* Step 1: setup
 #ifdef _MSC_VER
@@ -1037,6 +1038,10 @@ bool AppInit2(boost::thread_group& threadGroup)
         if (!sporkManager.SetPrivKey(GetArg("-sporkkey", "")))
             return InitError(_("Unable to sign spork message, wrong key?"));
     }
+
+    // Start the lightweight task scheme thread
+    CScheme::Function serviceLoop = boost::bind(&CScheme::serviceQueue, &scheme);
+    threadGroup.create_thread(boost::bind(&TraceThread<CScheme::Function>, "scheme", serviceLoop));
 
     /* Start the RPC server already.  It will be started in "warmup" mode
      * and not really process calls already (but it will signify connections

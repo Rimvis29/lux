@@ -13,6 +13,7 @@
 #include "rpcserver.h"
 #include "ui_interface.h"
 #include "util.h"
+#include "scheme.h"
 
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/filesystem.hpp>
@@ -57,7 +58,8 @@ void DetectShutdownThread(boost::thread_group* threadGroup)
 bool AppInit(int argc, char* argv[])
 {
     boost::thread_group threadGroup;
-    boost::thread* detectShutdownThread = NULL;
+    //boost::thread* detectShutdownThread = nullptr;
+    CScheme scheme;
 
     bool fRet = false;
 
