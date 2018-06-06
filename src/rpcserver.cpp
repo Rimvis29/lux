@@ -276,16 +276,11 @@ static const CRPCCommand vRPCCommands[] =
         /* P2P networking */
         {"network", "getnetworkinfo", &getnetworkinfo, true, false, false},
         {"network", "addnode", &addnode, true, true, false},
-        //{"network", "disconnectnode", &disconnectnode, true, true, false},
         {"network", "getaddednodeinfo", &getaddednodeinfo, true, true, false},
         {"network", "getconnectioncount", &getconnectioncount, true, false, false},
         {"network", "getnettotals", &getnettotals, true, true, false},
         {"network", "getpeerinfo", &getpeerinfo, true, false, false},
         {"network", "ping", &ping, true, false, false},
-        {"network", "setban", &setban, true, false, false},
-        {"network", "listbanned", &listbanned, true, false, false},
-        {"network", "clearbanned", &clearbanned, true, false, false},
-        {"network", "switchnetwork", &switchnetwork, true, false, false },
 
         /* Block chain and UTXO */
         {"blockchain", "getblockchaininfo", &getblockchaininfo, true, false, false},
@@ -380,7 +375,6 @@ static const CRPCCommand vRPCCommands[] =
         {"wallet", "getreceivedbyaddress", &getreceivedbyaddress, false, false, true},
         {"wallet", "getstakingstatus", &getstakingstatus, false, false, true},
         {"wallet", "gettransaction", &gettransaction, false, false, true},
-        {"wallet", "abandontransaction", &abandontransaction, false, false, true },
         {"wallet", "getunconfirmedbalance", &getunconfirmedbalance, false, false, true},
         {"wallet", "getwalletinfo", &getwalletinfo, false, false, true},
         {"wallet", "importprivkey", &importprivkey, true, false, true},

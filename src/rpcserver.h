@@ -224,12 +224,8 @@ extern UniValue getconnectioncount(const UniValue& params, bool fHelp); // in rp
 extern UniValue getpeerinfo(const UniValue& params, bool fHelp);
 extern UniValue ping(const UniValue& params, bool fHelp);
 extern UniValue addnode(const UniValue& params, bool fHelp);
-//extern UniValue disconnectnode(const UniValue& params, bool fHelp);
 extern UniValue getaddednodeinfo(const UniValue& params, bool fHelp);
 extern UniValue getnettotals(const UniValue& params, bool fHelp);
-extern UniValue setban(const UniValue& params, bool fHelp);
-extern UniValue listbanned(const UniValue& params, bool fHelp);
-extern UniValue clearbanned(const UniValue& params, bool fHelp);
 
 extern UniValue dumpprivkey(const UniValue& params, bool fHelp); // in rpcdump.cpp
 extern UniValue importprivkey(const UniValue& params, bool fHelp);
@@ -290,7 +286,6 @@ extern UniValue listaddressgroupings(const UniValue& params, bool fHelp);
 extern UniValue listaccounts(const UniValue& params, bool fHelp);
 extern UniValue listsinceblock(const UniValue& params, bool fHelp);
 extern UniValue gettransaction(const UniValue& params, bool fHelp);
-extern UniValue abandontransaction(const UniValue& params, bool fHelp);
 extern UniValue backupwallet(const UniValue& params, bool fHelp);
 extern UniValue keypoolrefill(const UniValue& params, bool fHelp);
 extern UniValue walletpassphrase(const UniValue& params, bool fHelp);
