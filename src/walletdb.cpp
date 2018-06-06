@@ -285,7 +285,7 @@ bool CWalletDB::WriteAccountingEntry(const uint64_t nAccEntryNum, const CAccount
     return Write(std::make_pair(std::string("acentry"), std::make_pair(acentry.strAccount, nAccEntryNum)), acentry);
 }
 
-bool CWalletDB::WriteAccountingEntry_Backend(const CAccountingEntry& acentry)
+bool CWalletDB::WriteAccountingEntry(const CAccountingEntry& acentry)
 {
     return WriteAccountingEntry(++nAccountingEntryNumber, acentry);
 }
@@ -405,31 +405,6 @@ DBErrors CWalletDB::ReorderTransactions(CWallet* pwallet)
 
     return DB_LOAD_OK;
 }
-
-void MaybeFlushWalletDB() {
-    static std::atomic<bool> fOneThread;
-    if (fOneThread.exchange(true)) {
-        return;
-    }
-    if (!GetBoolArg("-flushwallet", DEFAULT_FLUSHWALLET)) {
-        return;
-    }
-
-    static unsigned int nLastSeen = CWalletDB::GetUpdateCounter();
-    static unsigned int nLastFlushed = CWalletDB::GetUpdateCounter();
-    static int64_t nLastWalletUpdate = GetTime();
-
-    if (nLastSeen != CWalletDB::GetUpdateCounter()) {
-        nLastSeen = CWalletDB::GetUpdateCounter();
-        nLastWalletUpdate = GetTime();
-    }
-
-    if (nLastFlushed != CWalletDB::GetUpdateCounter() && GetTime() - nLastWalletUpdate >= 2) {
-        const std::string& strFile = pwalletMain->strWalletFile;
-            nLastFlushed = CWalletDB::GetUpdateCounter();
-    }
-    fOneThread = false;
-    }
 
 class CWalletScanState
 {
@@ -818,12 +793,6 @@ DBErrors CWalletDB::LoadWallet(CWallet* pwallet)
     if (wss.fAnyUnordered)
         result = ReorderTransactions(pwallet);
 
-    pwallet->laccentries.clear();
-    ListAccountCreditDebit("*", pwallet->laccentries);
-    BOOST_FOREACH(CAccountingEntry& entry, pwallet->laccentries) {
-        pwallet->wtxOrdered.insert(make_pair(entry.nOrderPos, CWallet::TxPair((CWalletTx*)0, &entry)));
-    }
-
     return result;
 }
 
@@ -1124,9 +1093,4 @@ bool CWalletDB::EraseTokenTx(uint256 hash)
 {
     nWalletDBUpdated++;
     return Erase(std::make_pair(std::string("tokentx"), hash));
-}
-
-unsigned int CWalletDB::GetUpdateCounter()
-{
-    return nWalletDBUpdateCounter;
 }
