@@ -395,15 +395,12 @@ case $host in
      ;;
 esac
 
-if test x$TARGET_OS = xwindows; then
-	CPPFLAGS="-Wno-unknown-pragmas $CPPFLAGS -DLUX_BUILD"
-	CXXFLAGS="-Wno-unknown-pragmas $CXXFLAGS"
-elif test x$TARGET_OS = xdarwin; then
+if test x$TARGET_OS = xdarwin; then
 	CPPFLAGS="-Wno-inconsistent-missing-override -Wno-unknown-pragmas -Wno-implicit-fallthrough $CPPFLAGS -DLUX_BUILD"
 	CXXFLAGS="-Wno-inconsistent-missing-override -Wno-unknown-pragmas -Wno-implicit-fallthrough $CXXFLAGS"
 else
-	CPPFLAGS="-Wno-unknown-pragmas -Wno-implicit-fallthrough $CPPFLAGS -DLUX_BUILD"
-	CXXFLAGS="-Wno-unknown-pragmas -Wno-implicit-fallthrough $CXXFLAGS"
+	CPPFLAGS="-Wno-unknown-pragmas $CPPFLAGS -DLUX_BUILD"
+	CXXFLAGS="-Wno-unknown-pragmas $CXXFLAGS"
 fi
 
 

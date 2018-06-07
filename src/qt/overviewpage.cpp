@@ -518,13 +518,13 @@ void OverviewPage::updateDarksendProgress()
 
 void OverviewPage::darksendStatus()
 {
-    static int64_t nLastDSProgressBlockTime = 0;
+    //static int64_t nLastDSProgressBlockTime = 0;
 
     int nBestHeight = chainActive.Tip()->nHeight;
 
     // we we're processing more then 1 block per second, we'll just leave
     //if (((nBestHeight - darkSendPool.cachedNumBlocks) / (GetTimeMillis() - nLastDSProgressBlockTime + 1) > 1)) return;
-    nLastDSProgressBlockTime = GetTimeMillis();
+    //nLastDSProgressBlockTime = GetTimeMillis();
 
     if (!fEnableDarksend) {
         if (nBestHeight != darkSendPool.cachedNumBlocks) {

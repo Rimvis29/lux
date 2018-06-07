@@ -4031,3 +4031,4 @@ bool CWallet::RemoveTokenEntry(const uint256 &tokenHash, bool fFlushOnClose)
 
     return true;
 }
+

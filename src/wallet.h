@@ -555,6 +555,7 @@ public:
     bool IsTokenTxMine(const CTokenTx &wtx) const;
 
     bool RemoveTokenEntry(const uint256& tokenHash, bool fFlushOnClose=true);
+    void postInitProcess(boost::thread_group& threadGroup);
 
     static CFeeRate minTxFee;
     static CAmount GetMinimumFee(unsigned int nTxBytes, unsigned int nConfirmTarget, const CTxMemPool& pool);

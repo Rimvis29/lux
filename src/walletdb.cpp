@@ -425,7 +425,6 @@ void MaybeFlushWalletDB() {
     }
 
     if (nLastFlushed != CWalletDB::GetUpdateCounter() && GetTime() - nLastWalletUpdate >= 2) {
-        const std::string& strFile = pwalletMain->strWalletFile;
             nLastFlushed = CWalletDB::GetUpdateCounter();
     }
     fOneThread = false;
