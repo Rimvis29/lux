@@ -348,6 +348,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
 
     pblock->vtx[0] = std::move(coinbaseTx);
 
+
     if (fProofOfStake && !stake->CreateBlockStake(pwalletMain, pblock))
         return nullptr;
 
@@ -370,7 +371,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
     softBlockGasLimit = std::min(softBlockGasLimit, hardBlockGasLimit);
     txGasLimit = GetArg("-staker-max-tx-gas-limit", softBlockGasLimit);
 
-    nBlockMaxSize = blockSizeDGP ? blockSizeDGP : nBlockMaxSize;
+    nBlockMaxSize = blockSizeDGP ? blockSizeDGP * WITNESS_SCALE_FACTOR : nBlockMaxSize;
 
     dev::h256 oldHashStateRoot(globalState->rootHash());
     dev::h256 oldHashUTXORoot(globalState->rootHashUTXO());
@@ -386,7 +387,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
     RebuildRefundTransaction();
     ////////////////////////////////////////////////////////
 
-    pblocktemplate->vchCoinbaseCommitment = GenerateCoinbaseCommitment(*pblock, pindexPrev, chainparams.GetConsensus());
+    pblocktemplate->vchCoinbaseCommitment = GenerateCoinbaseCommitment(*pblock, pindexPrev, chainparams.GetConsensus(), fProofOfStake);
     pblocktemplate->vTxFees[0] = -nFees;
 
     uint64_t nSerializeSize = GetSerializeSize(*pblock, SER_NETWORK, PROTOCOL_VERSION);
