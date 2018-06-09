@@ -171,12 +171,12 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 4-byte int at any alignment.
          */
-        pchMessageStart[0] = 0xf9;
-        pchMessageStart[1] = 0x73;
-        pchMessageStart[2] = 0xc9;
-        pchMessageStart[3] = 0xa7;
+        pchMessageStart[0] = 0xb6;
+        pchMessageStart[1] = 0xd8;
+        pchMessageStart[2] = 0xa7;
+        pchMessageStart[3] = 0xc9;
         vAlertPubKey = ParseHex("042d13c016ed91528241bcff222989769417eb10cdb679228c91e26e26900eb9fd053cd9f16a9a2894ad5ebbd551be1a4bd23bd55023679be17f0bd3a16e6fbeba");
-        nDefaultPort = /*28666*/ 26868;
+        nDefaultPort = /*28666*/ /*26868*/ 26668;
         nMaxReorganizationDepth = 100;
         nMinerThreads = 0;
         nMaturity = 79;
@@ -208,6 +208,10 @@ public:
         assert(consensus.hashGenesisBlock == uint256("0x00000759bb3da130d7c9aedae170da8335f5a0d01a9007e4c8d3ccd08ace6a42"));
         assert(genesis.hashMerkleRoot == uint256("0xe08ae0cfc35a1d70e6764f347fdc54355206adeb382446dd54c32cd0201000d3"));
 
+        vSeeds.push_back(CDNSSeedData("luxseed1.luxcore.io", "149.28.161.10")); // DNSSeed
+        vSeeds.push_back(CDNSSeedData("luxseed2.luxcore.io", "103.43.75.20 ")); // DNSSeed
+
+        /*
         vSeeds.push_back(CDNSSeedData("luxseed1.luxcore.io", "luxseed1.luxcore.io")); // DNSSeed
         vSeeds.push_back(CDNSSeedData("luxseed2.luxcore.io", "luxseed2.luxcore.io")); // DNSSeed
         vSeeds.push_back(CDNSSeedData("luxseed3.luxcore.io", "luxseed3.luxcore.io")); // DNSSeed
@@ -216,7 +220,7 @@ public:
         vSeeds.push_back(CDNSSeedData("45.76.114.209", "45.76.114.209")); // Non-standard DNS request
         vSeeds.push_back(CDNSSeedData("5.189.142.181", "5.189.142.181")); // Non-standard DNS request
         //vSeeds.push_back(CDNSSeedData("5.77.44.147", "5.77.44.147")); // Non-standard DNS request
-
+*/
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,48); // LUX address start with 'L'
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,63); // LUX script addresses start with 'S'
         base58Prefixes[SECRET_KEY]     = std::vector<unsigned char>(1,155);
