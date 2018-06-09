@@ -208,8 +208,8 @@ public:
         assert(consensus.hashGenesisBlock == uint256("0x00000759bb3da130d7c9aedae170da8335f5a0d01a9007e4c8d3ccd08ace6a42"));
         assert(genesis.hashMerkleRoot == uint256("0xe08ae0cfc35a1d70e6764f347fdc54355206adeb382446dd54c32cd0201000d3"));
 
-        vSeeds.push_back(CDNSSeedData("luxseed1.luxcore.io", "149.28.161.10")); // DNSSeed
-        vSeeds.push_back(CDNSSeedData("luxseed2.luxcore.io", "103.43.75.20 ")); // DNSSeed
+        vSeeds.push_back(CDNSSeedData("luxseed1.luxcore.io", "45.76.107.213")); // DNSSeed
+        vSeeds.push_back(CDNSSeedData("luxseed2.luxcore.io", "45.76.50.31")); // DNSSeed
 
         /*
         vSeeds.push_back(CDNSSeedData("luxseed1.luxcore.io", "luxseed1.luxcore.io")); // DNSSeed
