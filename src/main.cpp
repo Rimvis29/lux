@@ -2385,8 +2385,9 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     // Special case for the genesis block, skipping connection of its transactions
     // (its coinbase is unspendable)
     //Genesis block's hash cannot be calculated using PHI2, so no need to check PHI2 block hash
-    if (block.GetHash() == chainparams.GetConsensus().hashGenesisBlock) {
-        view.SetBestBlock(pindex->GetBlockHash());
+     if (block.GetHash() == chainparams.GetConsensus().hashGenesisBlock) {
+        if (!fJustCheck)
+            view.SetBestBlock(pindex->GetBlockHash());
         return true;
     }
 
