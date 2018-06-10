@@ -285,21 +285,21 @@ public:
 
         networkID = CBaseChainParams::TESTNET;
         strNetworkID = "test";
-        pchMessageStart[0] = 0x54;
-        pchMessageStart[1] = 0x67;
-        pchMessageStart[2] = 0x51;
-        pchMessageStart[3] = 0xab;
+        pchMessageStart[0] = 0x49;
+        pchMessageStart[1] = 0x87;
+        pchMessageStart[2] = 0x32;
+        pchMessageStart[3] = 0xbd;
         vAlertPubKey = ParseHex("000010e83b2703ccf322f7dbd62dd5855ac7c10bd055814ce121ba32607d573b8810c02c0582aed05b4deb9c4b77b26d92428c61256cd42774babea0a073b2ed0c9");
-        nDefaultPort = 28333;
+        nDefaultPort = 23333;
         nMinerThreads = 0;
         nMaturity = 10;
         nModifierUpdateBlock = 51197; //approx Mon, 17 Apr 2017 04:00:00 GMT
 
         //! Modify the testnet genesis block so the timestamp is valid for a later start.
-        const char* pszTimestamp = "Lux - Testnet"; // Input Activation code to activate blockchain
+        const char* pszTimestamp = "Lux - Testnet Final"; // Input Activation code to activate blockchain
         CMutableTransaction txNew;
         txNew.nVersion = 1;
-        txNew.nTime = 1527664240;
+        txNew.nTime = 1528625249;
         txNew.nLockTime = 0;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
@@ -311,7 +311,7 @@ public:
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
-        genesis.nTime = 1527664240; //05/29/2018 @ 5:00am (UTC)
+        genesis.nTime = 1528625249; //05/29/2018 @ 5:00am (UTC)
         genesis.nBits = 0x1e0fffff;
         genesis.nNonce = 1153266;
         genesis.hashStateRoot = uint256(h256Touint(dev::h256("e965ffd002cd6ad0e2dc402b8044de833e06b23127ea8c3d80aec91410771495"))); // lux
@@ -325,9 +325,9 @@ public:
 //        std::cout << genesis.GetHash().GetHex() << std::endl;
 //        std::cout << genesis.hashMerkleRoot.GetHex() << std::endl;
 
-        nSplitRewardBlock = 100;
-        nSwitchPhi2Block = 300;
-        nFirstSCBlock = 500;
+        nSplitRewardBlock = 200;
+        nSwitchPhi2Block = 100;
+        nFirstSCBlock = 200;
         nPruneAfterHeight = 700;
 
         consensus.hashGenesisBlock = genesis.GetHash();
@@ -337,8 +337,8 @@ public:
 
        // vFixedSeeds.clear();
         //vSeeds.clear();
-        vSeeds.push_back(CDNSSeedData("luxtest1", "108.160.141.118"));
-        vSeeds.push_back(CDNSSeedData("luxtest2", "45.76.53.201"));
+        vSeeds.push_back(CDNSSeedData("luxtest1", "149.28.164.102"));
+        vSeeds.push_back(CDNSSeedData("luxtest2", "149.28.160.168"));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 48); // Testnet lux addresses start with 'l'
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 63);  // Testnet lux script addresses start with 'S'
@@ -367,12 +367,12 @@ public:
         strSporkKey = "04348C2F50F90267E64FACC65BFDC9D0EB147D090872FB97ABAE92E9A36E6CA60983E28E741F8E7277B11A7479B626AC115BA31463AC48178A5075C5A9319D4A38";
 
         strDarksendPoolDummyAddress = "LPGq7DZbqZ8Vb3tfLH8Z8VHqeV4fsK68oX";
-        nStartMasternodePayments = 1507656633; //Fri, 09 Jan 2015 21:05:58 GMT
+        nStartMasternodePayments = 1528625249; //Fri, 09 Jan 2015 21:05:58 GMT
 
         nStakingRoundPeriod = 120; // 5 seconds a round
         nStakingInterval = 22; // 30 seconds
         nStakingMinAge = 360; // 6 minutes
-        nFirstSCBlock = 1000;
+
     }
     const Checkpoints::CCheckpointData& Checkpoints() const
     {
