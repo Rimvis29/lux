@@ -285,10 +285,10 @@ public:
 
         networkID = CBaseChainParams::TESTNET;
         strNetworkID = "test";
-        pchMessageStart[0] = 0x49;
-        pchMessageStart[1] = 0x87;
-        pchMessageStart[2] = 0x32;
-        pchMessageStart[3] = 0xbd;
+        pchMessageStart[0] = 0x48;
+        pchMessageStart[1] = 0x86;
+        pchMessageStart[2] = 0x31;
+        pchMessageStart[3] = 0xa1;
         vAlertPubKey = ParseHex("000010e83b2703ccf322f7dbd62dd5855ac7c10bd055814ce121ba32607d573b8810c02c0582aed05b4deb9c4b77b26d92428c61256cd42774babea0a073b2ed0c9");
         nDefaultPort = 23333;
         nMinerThreads = 0;
@@ -296,7 +296,7 @@ public:
         nModifierUpdateBlock = 51197; //approx Mon, 17 Apr 2017 04:00:00 GMT
 
         //! Modify the testnet genesis block so the timestamp is valid for a later start.
-        const char* pszTimestamp = "Lux - Testnet Final"; // Input Activation code to activate blockchain
+        const char* pszTimestamp = "Lux - Testnet Final 1"; // Input Activation code to activate blockchain
         CMutableTransaction txNew;
         txNew.nVersion = 1;
         txNew.nTime = 1528625249;
@@ -311,15 +311,15 @@ public:
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
-        genesis.nTime = 1528625249; //05/29/2018 @ 5:00am (UTC)
+        genesis.nTime = 1528626645; //05/29/2018 @ 5:00am (UTC)
         genesis.nBits = 0x1e0fffff;
-        genesis.nNonce = 1153266;
+        genesis.nNonce = 2804831;
         genesis.hashStateRoot = uint256(h256Touint(dev::h256("e965ffd002cd6ad0e2dc402b8044de833e06b23127ea8c3d80aec91410771495"))); // lux
         genesis.hashUTXORoot = uint256(h256Touint(dev::sha3(dev::rlp("")))); // lux
 
-//        while (!CheckProof(genesis.GetHash(), genesis.nBits)) {
-//            genesis.nNonce ++;
-//        }
+ //       while (!CheckProof(genesis.GetHash(), genesis.nBits)) {
+ //           genesis.nNonce ++;
+ //       }
 
 //        std::cout << genesis.nNonce << std::endl;
 //        std::cout << genesis.GetHash().GetHex() << std::endl;
@@ -332,8 +332,8 @@ public:
 
         consensus.hashGenesisBlock = genesis.GetHash();
 
-        assert(consensus.hashGenesisBlock == uint256("0x00000ed61786c92e01948df9f543fc2effc17a025ec14f743ec1848dff81233b"));
-        assert(genesis.hashMerkleRoot == uint256("0x484415096c0c3f026838b97854d02bbf38aad5449938ef62f1fdd51c371a1696"));
+        assert(consensus.hashGenesisBlock == uint256("0x00000b46e00d063a1f45f37fcd72bf6645733a49c119be9b4ac7e8eb390b17ed"));
+        assert(genesis.hashMerkleRoot == uint256("0x85a8cc858a8f5a271bf123bc322697b2f9a3a73efb351c55794701612b1bb995"));
 
        // vFixedSeeds.clear();
         //vSeeds.clear();
@@ -367,7 +367,7 @@ public:
         strSporkKey = "04348C2F50F90267E64FACC65BFDC9D0EB147D090872FB97ABAE92E9A36E6CA60983E28E741F8E7277B11A7479B626AC115BA31463AC48178A5075C5A9319D4A38";
 
         strDarksendPoolDummyAddress = "LPGq7DZbqZ8Vb3tfLH8Z8VHqeV4fsK68oX";
-        nStartMasternodePayments = 1528625249; //Fri, 09 Jan 2015 21:05:58 GMT
+        nStartMasternodePayments = 1528626645; //Fri, 09 Jan 2015 21:05:58 GMT
 
         nStakingRoundPeriod = 120; // 5 seconds a round
         nStakingInterval = 22; // 30 seconds
