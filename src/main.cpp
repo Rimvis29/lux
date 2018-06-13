@@ -2208,7 +2208,7 @@ bool DisconnectBlock(CBlock& block, CValidationState& state, CBlockIndex* pindex
     view.SetBestBlock(pindex->pprev->GetBlockHash());
 //#if 0
       if (pindex->nHeight >= Params().FirstSCBlock()) {
-        globalState->setRoot(uintToh256(pindex->pprev->hashStateRoot)); // lux
+//        globalState->setRoot(uintToh256(pindex->pprev->hashStateRoot)); // lux
         globalState->setRootUTXO(uintToh256(pindex->pprev->hashUTXORoot)); // lux
 
         if (pfClean == NULL && fLogEvents) {
@@ -2348,18 +2348,16 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     AssertLockHeld(cs_main);
 
     ///////////////////////////////////////////////// // lux
-//#if 0
+#if 0
     LuxDGP luxDGP(globalState.get(), fGettingValuesDGP);
     globalSealEngine->setLuxSchedule(luxDGP.getGasSchedule(pindex->nHeight + 1));
-//#endif
+#endif
+    uint32_t sizeBlockDGP = 0;//luxDGP.getBlockSize(pindex->nHeight + 1);
     uint64_t minGasPrice = 0;//luxDGP.getMinGasPrice(pindex->nHeight + 1);
     uint64_t blockGasLimit = DEFAULT_BLOCK_GAS_LIMIT_DGP;//luxDGP.getBlockGasLimit(pindex->nHeight + 1);
-
-#if 0
-    uint32_t sizeBlockDGP = 0;//luxDGP.getBlockSize(pindex->nHeight + 1);
     dgpMaxBlockSize = sizeBlockDGP ? sizeBlockDGP : dgpMaxBlockSize;
     updateBlockSizeParams(dgpMaxBlockSize);
-#endif
+
     std::vector<CTxOut> checkVouts;
     uint64_t countCumulativeGasUsed = 0;
 
@@ -2698,6 +2696,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     ////////////////////////////////////////////////////////////////// // lux
     if (pindex->nHeight >= Params().FirstSCBlock()) {
         checkBlock.hashMerkleRoot = checkBlock.BuildMerkleTree();
+        // TODO: work around segfault
         checkBlock.hashStateRoot = h256Touint(globalState->rootHash());
         checkBlock.hashUTXORoot = h256Touint(globalState->rootHashUTXO());
 

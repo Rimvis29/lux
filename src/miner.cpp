@@ -365,17 +365,20 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
         originalRewardTx = CMutableTransaction(pblock->vtx[1]);
 
     //////////////////////////////////////////////////////// lux
+#if 0
     LuxDGP luxDGP(globalState.get(), fGettingValuesDGP);
     globalSealEngine->setLuxSchedule(luxDGP.getGasSchedule(nHeight));
-    uint32_t blockSizeDGP = luxDGP.getBlockSize(nHeight);
-    minGasPrice = luxDGP.getMinGasPrice(nHeight);
+#endif
+
+    uint32_t blockSizeDGP = 0; //luxDGP.getBlockSize(nHeight);
+    minGasPrice = 0; // luxDGP.getMinGasPrice(nHeight);
     if(IsArgSet("-staker-min-tx-gas-price")) {
         CAmount stakerMinGasPrice;
         if(ParseMoney(GetArg("-staker-min-tx-gas-price", ""), stakerMinGasPrice)) {
             minGasPrice = std::max(minGasPrice, (uint64_t)stakerMinGasPrice);
         }
     }
-    hardBlockGasLimit = luxDGP.getBlockGasLimit(nHeight);
+    hardBlockGasLimit = DEFAULT_BLOCK_GAS_LIMIT_DGP; // luxDGP.getBlockGasLimit(nHeight);
     softBlockGasLimit = GetArg("-staker-soft-block-gas-limit", hardBlockGasLimit);
     softBlockGasLimit = std::min(softBlockGasLimit, hardBlockGasLimit);
     txGasLimit = GetArg("-staker-max-tx-gas-limit", softBlockGasLimit);
@@ -386,10 +389,12 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
     dev::h256 oldHashUTXORoot(globalState->rootHashUTXO());
     addPriorityTxs(minGasPrice);
     addPackageTxs(minGasPrice);
+#if 0
     pblock->hashStateRoot = uint256(h256Touint(dev::h256(globalState->rootHash())));
     pblock->hashUTXORoot = uint256(h256Touint(dev::h256(globalState->rootHashUTXO())));
     globalState->setRoot(oldHashStateRoot);
     globalState->setRootUTXO(oldHashUTXORoot);
+#endif
 
     //this should already be populated by AddBlock in case of contracts, but if no contracts
     //then it won't get populated
