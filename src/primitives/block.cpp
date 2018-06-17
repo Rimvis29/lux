@@ -13,13 +13,27 @@
 #include "util.h"
 #include "chainparams.h"
 #include "versionbits.h"
+#include "crypto/common.h"
 
 uint256 CBlockHeader::GetHash(bool phi2block) const {
-    if (nVersion > VERSIONBITS_LAST_OLD_BLOCK_VERSION && phi2block) {
-        return phi2_hash(BEGIN(nVersion), END(hashUTXORoot));
+#if defined(WORDS_BIGENDIAN)
+    uint8_t data[80];
+    WriteLE32(&data[0], nVersion);
+    memcpy(&data[4], hashPrevBlock.begin(), hashPrevBlock.size());
+    memcpy(&data[36], hashMerkleRoot.begin(), hashMerkleRoot.size());
+    WriteLE32(&data[68], nTime);
+    WriteLE32(&data[72], nBits);
+    WriteLE32(&data[76], nNonce);
+//    memcpy(&data[16], hashUTXORoot.begin(), hashUTXORoot.size());
+//    memcpy(&data[16], hashStateRoot.begin(), hashStateRoot.size());
+    return Phi1612(data, data + 80);
+#else // Can take shortcut for little endian
+   if (nVersion > VERSIONBITS_LAST_OLD_BLOCK_VERSION && phi2block) {
+       return phi2_hash(BEGIN(nVersion), END(hashUTXORoot));
     } else {
         return Phi1612(BEGIN(nVersion), END(nNonce));
     }
+#endif
 }
 
 uint256 CBlock::BuildMerkleTree(bool* fMutated) const

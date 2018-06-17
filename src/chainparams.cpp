@@ -148,11 +148,11 @@ public:
         consensus.nLastPOWBlock = 6000000;
         // Deployment of SegWit (BIP141 and BIP143)
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].bit = 1;
-        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1529469440;
+        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1529533203; // 20/06/2018
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1557187200; // TODO: ?? - just some random date - 05.07.2019
         //TODO: set CSV parameters for mainnet
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].bit = 0;
-        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 1529469440;
+        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 1529533203; // 20/06/2018
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 1557187200; // TODO: ?? - just some random date - 05.07.2019
 
         //SMART_CONTRACTS_HARDFORK deployment does not require start time and timeout, because it uses block number
@@ -176,7 +176,7 @@ public:
         pchMessageStart[2] = 0xc9;
         pchMessageStart[3] = 0xa7;
         vAlertPubKey = ParseHex("042d13c016ed91528241bcff222989769417eb10cdb679228c91e26e26900eb9fd053cd9f16a9a2894ad5ebbd551be1a4bd23bd55023679be17f0bd3a16e6fbeba");
-        nDefaultPort = /*28666*/ /*26868*/ 16120;
+        nDefaultPort = 16120;
         nMaxReorganizationDepth = 100;
         nMinerThreads = 0;
         nMaturity = 79;
@@ -218,14 +218,15 @@ public:
         vSeeds.push_back(CDNSSeedData("5.189.142.181", "5.189.142.181")); // Non-standard DNS request
         //vSeeds.push_back(CDNSSeedData("5.77.44.147", "5.77.44.147")); // Non-standard DNS request
         #endif
-
-        vSeeds.push_back(CDNSSeedData("45.77.238.204", "45.77.238.204")); // Non-standard DNS request
-        vSeeds.push_back(CDNSSeedData("149.28.164.12", "149.28.164.12")); // Non-standard DNS request
-        vSeeds.push_back(CDNSSeedData("149.28.166.108", "149.28.166.108")); // Non-standard DNS request
-        vSeeds.push_back(CDNSSeedData("45.76.112.169", "45.76.112.169")); // Non-standard DNS request
-        vSeeds.push_back(CDNSSeedData("149.28.165.193", "149.28.165.193")); // Non-standard DNS request
-        vSeeds.push_back(CDNSSeedData("45.32.188.164", "45.32.188.164")); // Non-standard DNS request
-        vSeeds.push_back(CDNSSeedData("149.28.169.58", "149.28.169.58")); // Non-standard DNS request
+        vSeeds.push_back(CDNSSeedData("149.28.173.114", "149.28.173.114")); // Non-standard DNS request
+        vSeeds.push_back(CDNSSeedData("149.28.163.109", "149.28.163.109")); // Non-standard DNS request
+        vSeeds.push_back(CDNSSeedData("149.28.168.97", "149.28.168.97")); // Non-standard DNS request
+        vSeeds.push_back(CDNSSeedData("45.63.24.72", "45.63.24.72")); // Non-standard DNS request
+        vSeeds.push_back(CDNSSeedData("149.28.173.15", "149.28.173.15")); // Non-standard DNS request
+        vSeeds.push_back(CDNSSeedData("45.76.121.167", "45.76.121.167")); // Non-standard DNS request
+        vSeeds.push_back(CDNSSeedData("149.28.174.129", "149.28.174.129")); // Non-standard DNS request
+        vSeeds.push_back(CDNSSeedData("149.28.163.104", "149.28.163.104")); // Non-standard DNS request
+        vSeeds.push_back(CDNSSeedData("207.148.85.12", "207.148.85.12")); // Non-standard DNS request
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,48); // LUX address start with 'L'
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,63); // LUX script addresses start with 'S'
